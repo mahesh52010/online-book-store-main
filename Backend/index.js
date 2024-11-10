@@ -10,10 +10,8 @@ const PORT = process.env.PORT || 5000;
 // Updated MongoDB connection string
 const mongoURI = 'mongodb://atlas-sql-672e3eba670bbb2724fa746d-rqj18.a.query.mongodb.net/online-book-store-main?ssl=true&authSource=admin';
 
-mongoose.connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
+// Use the updated connection string
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => {
     console.log('MongoDB connected successfully');
 })
