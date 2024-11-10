@@ -6,6 +6,17 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+// Updated MongoDB connection string for MongoDB Atlas
+const mongoURI = 'mongodb://atlas-sql-672e3eba670bbb2724fa746d-rqj18.a.query.mongodb.net/online-book-store-main?ssl=true&authSource=admin';
+
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => console.log("Connected to MongoDB Atlas"))
+  .catch(err => console.error("MongoDB connection error:", err));
+
+
 const books = [
     {
         name: "BEGINING OF MERN STACK",
