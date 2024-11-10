@@ -1,33 +1,28 @@
-import express from "express";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import cors from "cors";
-
-import bookRoute from "./route/book.route.js";
-import userRoute from "./route/user.route.js";
-
-const app = express();
-
-app.use(cors());
-app.use(express.json());
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
-const PORT = process.env.PORT || 4000;
-const URI = process.env.MongoDBURI;
+const app = express();
+const PORT = process.env.PORT || 5000;
 
-// connect to mongoDB
-try {
-    mongoose.connect(URI);
-    console.log("Connected to mongoDB");
-} catch (error) {
-    console.log("Error: ", error);
-}
+// Updated MongoDB connection string
+const mongoURI = 'mongodb://atlas-sql-672e3eba670bbb2724fa746d-rqj18.a.query.mongodb.net/online-book-store-main?ssl=true&authSource=admin';
 
-// defining routes
-app.use("/book", bookRoute);
-app.use("/user", userRoute);
+mongoose.connect(mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+.then(() => {
+    console.log('MongoDB connected successfully');
+})
+.catch(err => {
+    console.error('MongoDB connection error:', err);
+});
+
+// Middleware and routes would go here
 
 app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
